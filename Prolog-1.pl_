@@ -1,0 +1,33 @@
+% Parent-child relationships
+parent(john, mary).   % John is a parent of Mary
+parent(mary, lisa).   % Mary is a parent of Lisa
+parent(mary, james).  % Mary is a parent of James
+parent(james, sophia).% James is a parent of Sophia
+parent(john, mike).   % John is a parent of Mike
+parent(mike, ben).    % Mike is a parent of Ben
+
+% Gender information
+male(john).           % John is male
+female(mary).         % Mary is female
+female(lisa).         % Lisa is female
+male(james).          % James is male
+female(sophia).       % Sophia is female
+male(mike).           % Mike is male
+male(ben).            % Ben is male
+
+% A person is a sibling if they share at least one parent
+sibling(X, Y) :-
+    parent(P, X),
+    parent(P, Y),
+    X \= Y.  % X and Y must be different persons
+
+% A person is a grandparent if they are a parent of a parent
+grandparent(G, C) :-
+    parent(G, P),
+    parent(P, C).
+
+% A person is an aunt/uncle if they are a sibling of a parent
+aunt_or_uncle(A, C) :-
+    sibling(A, P),
+    parent(P, C).
+
